@@ -1,0 +1,1 @@
+Biblioteca EVA: eva-logo.png e ods-7.png são cópias dos dados PNG dos anexos desta conversa, sem recriação. Versões acessíveis ao ambiente: 2048x709 e 1600x1600. Componentes BrandMark e OdsMark preservam proporções com object-fit: contain. A marca usa apoio claro no tema escuro para preservar contraste. Configure futuras versões em src/config/assets.js.
