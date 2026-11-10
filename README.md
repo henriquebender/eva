@@ -71,8 +71,25 @@ Os testes de navegador cobrem as dez rotas nos dois idiomas, temas, persistênci
 
 ## GitHub Pages
 
-Não há publicação automática. Quando autorizada, gere dist e publique essa pasta pelo fluxo de Pages escolhido.
-base './' e HashRouter permitem navegação em hospedagem estática e subdiretórios.
+Preparado para o repositório https://github.com/henriquebender/eva, branch main, no endereço https://henriquebender.github.io/eva/.
+
+O workflow .github/workflows/deploy.yml usa Node.js LTS, npm ci com package-lock.json, npm run build e as ações oficiais de Pages para publicar dist. Executa a cada push em main e permite disparo manual em Actions > Deploy EVA to GitHub Pages > Run workflow, selecionando main. Outras branches não são publicadas.
+
+Antes do primeiro envio:
+1. No repositório, abra Settings > Pages > Build and deployment > Source e escolha GitHub Actions.
+2. Confira que GitHub Actions está habilitado. Para GitHub Pages gratuito no plano GitHub Free, o repositório deve ser público.
+3. Envie os arquivos do projeto para main, incluindo package-lock.json e .github/workflows/deploy.yml. Esse push acionará a publicação automaticamente.
+4. Acompanhe a execução em Actions. O endereço será disponibilizado após a conclusão do deploy.
+
+Não é necessário criar branch gh-pages, configurar tokens pessoais ou enviar node_modules/dist. O workflow usa GITHUB_TOKEN com contents: read, pages: write e id-token: write, além do ambiente github-pages. Se houver uma regra de aprovação nesse ambiente, o deploy aguardará a aprovação.
+
+Vite usa base: '/eva/'. As imagens em public/assets usam import.meta.env.BASE_URL, e o HashRouter foi preservado. Links internos têm o formato /eva/#/simulador e podem ser atualizados no navegador.
+
+Localmente, npm run dev atende em http://127.0.0.1:5173/eva/ (ou na porta informada pelo Vite). npm run preview atende o build em http://127.0.0.1:4173/eva/.
+
+Os testes de navegador também usam /eva/. Para testar o build com o mesmo conjunto de testes, defina EVA_TEST_PREVIEW=1 antes de npm run test:e2e. No PowerShell: $env:EVA_TEST_PREVIEW='1'; npm run test:e2e. Para voltar ao servidor de desenvolvimento: Remove-Item Env:EVA_TEST_PREVIEW.
+
+A preparação local não executa git push, não altera configurações remotas e não publica o site.
 
 ## Privacidade e acessibilidade
 
